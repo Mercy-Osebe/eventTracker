@@ -19,6 +19,7 @@ class m220520_142903_create_task_table extends Migration
             'message' => $this->text()->notNull(),
             'actual_time' => $this->string(50)->notNull(),
             'display_message' => $this->text()->notNull(),
+            'colors' => $this->string(10)->notNull(),
         ]);
     }
 
