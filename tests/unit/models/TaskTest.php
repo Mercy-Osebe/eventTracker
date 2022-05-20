@@ -15,26 +15,68 @@ class TaskTest extends \Codeception\Test\Unit
         $ar = explode(' ', $reportStr);
         $serversStarted = $ar[1];
         $this->assertEquals('12:00:00', $task->program_time);
-        // $this->assertEquals('12:00.00', $task->program_time);
+
         $this->assertEquals('START', $task->event);
-        $this->assertEquals('Start '.$serversStarted.' servers', $task->message);
+        $this->assertEquals(
+            'Start ' . $serversStarted . ' servers',
+            $task->message
+        );
         $this->assertGreaterThanOrEqual('10', $serversStarted);
         $this->assertLessThanOrEqual('20', $serversStarted);
     }
 
     public function testStopWorks()
     {
-        // expect_that($user = User::findIdentity(100));
-        // expect($user->username)->equals('admin');
+        $task = new Task();
+        $task->start();
+        $activeServerCountBeforeStop = $task->getActiveServersCount();
+        $task->stop();
+        $reportStr = $task->report();
+        $ar = explode(' ', $reportStr);
+        $activeServers = $ar[1];
 
-        // expect_not(User::findIdentity(999));
+        $this->assertGreaterThanOrEqual('0', $activeServers);
+
+        $this->assertGreaterThanOrEqual('5', $task->getStopServersCount());
+        $this->assertLessThanOrEqual(
+            $activeServerCountBeforeStop,
+            $task->getStopServersCount()
+        );
+
+        $this->assertEquals('STOP', $task->event);
+        $this->assertEquals('12:00:40', $task->program_time);
     }
 
     public function testReportWorks()
     {
-        // expect_that($user = User::findIdentity(100));
-        // expect($user->username)->equals('admin');
+        $task = new Task();
+        $result = $task->report();
+        $this->assertEquals('Reported 0  running', $result);
 
-        // expect_not(User::findIdentity(999));
+        $this->setInterval(function() use ($task){
+            $task->start();
+        }, 30);
+
+
+        $this->setInterval(function() use ($task){
+            $task->stop();
+        }, 40);
+
+
+        $this->setInterval(function() use ($task){
+            $task->report();
+            $this->assertEquals('Reported 0  running', $task->report());
+        }, 50);
+
+       
+    }
+
+    function setInterval($f, $milliseconds)
+    {
+        $seconds = (int) $milliseconds / 1000;
+        while (true) {
+            $f();
+            sleep($seconds);
+        }
     }
 }
