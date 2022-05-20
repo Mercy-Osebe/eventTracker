@@ -13,6 +13,7 @@ return [
         '@npm'   => '@vendor/npm-asset',
     ],
     'language' => 'en-US',
+    'timeZone' => 'Africa/Nairobi',
     'components' => [
         'db' => $db,
         'mailer' => [

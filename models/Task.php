@@ -4,6 +4,7 @@ namespace app\models;
 
 use Exception;
 use Yii;
+use DateTime;
 
 /**
  * This is the model class for table "task".
@@ -70,20 +71,22 @@ class Task extends \yii\db\ActiveRecord
     public function start()
     {
         $servers = rand(10, 20);
-        $date = date('H:i:s');
-        $startMessage = 'Start' . ' ' . $servers . ' ' . ' servers';
 
-        $this->program_time = 345345445646576868;
+        $dateObj = new DateTime('2022-05-20 12:00:00');
+        $program_time = $dateObj->format('H:i:s');
+        $startMessage = 'Start '. $servers .' servers';
+
+        $this->program_time = $program_time;
         $this->event = 'START';
         $this->message = $startMessage;
-        $this->actual_time = $date;
-        $this->display_message = $date. ' '. $startMessage;
+        $this->actual_time =  date('H:i:s');
+        $this->display_message =  $program_time. ' '. $startMessage;
         $this->colors = '#fff';
         if($this->save())
         {
             $this->servers = $servers;
         }else{
-            throw new Exception($this->errors());
+            throw new Exception(json_encode($this->getErrors()));
         }
     }
 
