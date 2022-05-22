@@ -2,85 +2,24 @@
 
 /** @var yii\web\View $this */
 
-$this->title = 'My Yii Application';
-?>
-<div class="site-index" style="background-image:url('../pics/wall.png')" >
+use yii\helpers\Html;
 
-    <div class="jumbotron text-center bg-transparent">
+$this->title = 'My Yii Application'; ?>
+<div class="site-index"  >
+
+    <div class="text-center bg-transparent" style="background-image:url('../pics/wall.png')">
         <div id="clockContainer">
-        <div id="hour"></div>
-        <div id="minute"></div>
-        <div id="second"></div>
-        <div id="pin"></div>
-    </div>
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-    <p>
-        This is the About page. You may modify the following file to customize its content:
-    </p>
-
-
+            <div id="hour"></div>
+            <div id="minute"></div>
+            <div id="second"></div>
+            <div id="pin"></div>
+        </div>
+    <?= Html::button('Report', ['class' => 'btn btn-primary','id' => 'report-id' ,'name' => 'contact-button']) ?>
 
     </div>
+
+    <div id="report-result">
+
+    </div>
+
 </div>
