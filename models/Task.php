@@ -92,7 +92,9 @@ class Task extends \yii\db\ActiveRecord
         $newTask = new Task();
         $newTask->program_time = $this->program_time;
         $newTask->event = 'START';
+
         $newTask->message = $startMessage;
+        
         $newTask->actual_time = date('H:i:s');
         $newTask->display_message = $this->program_time. ' ' . $startMessage;
         $newTask->colors = '#fff';
@@ -102,6 +104,8 @@ class Task extends \yii\db\ActiveRecord
         } else {
             throw new Exception(json_encode($newTask->getErrors()));
         }
+
+        return $startMessage;
     }
 
     public function stop()
