@@ -31,7 +31,19 @@ REQUIREMENTS
 
 1. Clone the appliction to the root of your web server e.g apache /var/www/html/event-tracker
 
+1. Rename the cloned folder to event-tracker
+
+1. cd into the event-tracker folder
+
 1. Run `composer install` to install dependencies
+
+1. Run this two commands
+
+
+    ```bash
+    chmod -R 777 web/assets
+    chmod -R 777 web/runtime
+    ```
 
 1. Run migrations
 
@@ -40,6 +52,10 @@ REQUIREMENTS
     ```
 
     Select yes to all
+
+1. To access the application on browser use this link
+
+        http://localhost/event-tracker/web/site/index
 
 1. To simulate members generating events [OPTIONAL]
 
