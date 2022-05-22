@@ -10,6 +10,10 @@ REQUIREMENTS
 
 ## Setting up
 
+1. create two database in your db
+    event_tracker (for application)
+    task_test_db (for test)
+
 1. Clone the appliction to the root of your web server e.g apache /var/www/html
 
 1. Run `composer install` to install dependencies
