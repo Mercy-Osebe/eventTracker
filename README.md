@@ -1,5 +1,10 @@
 <h1 align="center"> Task monitor </h1>
 
+DESCRIPTION
+------------
+
+This application uses yii2 framework to build the task monitor
+
 
 REQUIREMENTS
 ------------
