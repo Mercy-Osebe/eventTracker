@@ -4,7 +4,7 @@ namespace app\models;
 
 use Exception;
 use Yii;
-use DateTime;
+
 
 /**
  * This is the model class for table "task".
@@ -18,14 +18,14 @@ use DateTime;
  */
 class Task extends \yii\db\ActiveRecord
 {
-    private $servers = 0;
-    private $serversToStop = 0;
+    private $servers = 0; // active servers
+    private $serversToStop = 0; // no of servers to stop
 
-    private $dateObj;
+   
 
     function __construct()
     {
-        $this->dateObj = new DateTime('2022-05-20 12:00:00');
+        
     }
     /**
      * {@inheritdoc}
@@ -75,20 +75,32 @@ class Task extends \yii\db\ActiveRecord
     public function start()
     {
         $servers = rand(10, 20);
-
-        $program_time = $this->dateObj->format('H:i:s');
         $startMessage = 'Start ' . $servers . ' servers';
 
-        $this->program_time = $program_time;
-        $this->event = 'START';
-        $this->message = $startMessage;
-        $this->actual_time = date('H:i:s');
-        $this->display_message = $program_time . ' ' . $startMessage;
-        $this->colors = '#fff';
-        if ($this->save()) {
-            $this->servers = $servers;
+        // $this->program_time = $program_time;
+        // $this->event = 'START';
+        // $this->message = $startMessage;
+        // $this->actual_time = date('H:i:s');
+        // $this->display_message = $program_time . ' ' . $startMessage;
+        // $this->colors = '#fff';
+        // if ($this->save()) {
+        //     $this->servers = $servers;
+        // } else {
+        //     throw new Exception(json_encode($this->getErrors()));
+        // }
+
+        $newTask = new Task();
+        $newTask->program_time = $this->program_time;
+        $newTask->event = 'START';
+        $newTask->message = $startMessage;
+        $newTask->actual_time = date('H:i:s');
+        $newTask->display_message = $this->program_time. ' ' . $startMessage;
+        $newTask->colors = '#fff';
+        if ($newTask->save()) {
+            $this->servers = $this->servers + $servers;
+            echo $newTask->display_message;
         } else {
-            throw new Exception(json_encode($this->getErrors()));
+            throw new Exception(json_encode($newTask->getErrors()));
         }
     }
 
@@ -98,35 +110,40 @@ class Task extends \yii\db\ActiveRecord
 
         $this->servers = $this->servers - $this->serversToStop;
 
-        $program_time = $this->dateObj->modify('+40 seconds')->format('H:i:s');
         $actual_time = date('H:i:s');
         $stopMessage = 'Stop ' . $this->serversToStop . ' servers';
 
-        $this->program_time = $program_time;
-        $this->event = 'STOP';
-        $this->message = $stopMessage;
-        $this->actual_time = $actual_time;
-        $this->display_message = $actual_time . ' ' . $stopMessage;
-        $this->colors = '#fff';
-        if (!$this->save()) {
-            throw new Exception(json_encode($this->getErrors()));
+        $newTask = new Task();
+
+        $newTask->program_time = $this->program_time;
+        $newTask->event = 'STOP';
+        $newTask->message = $stopMessage;
+        $newTask->actual_time = $actual_time;
+        $newTask->display_message = $this->program_time. ' ' . $stopMessage;
+        $newTask->colors = '#fff';
+        if (!$newTask->save()) {
+            throw new Exception(json_encode($newTask->getErrors()));
+        } else {
+            echo $newTask->display_message;
         }
     }
 
     public function report()
     {
-
-        $program_time = $this->dateObj->modify('+40 seconds')->format('H:i:s');
         $actual_time = date('H:i:s');
         $reportMessage = 'Report ' . $this->servers . ' servers running';
-        $this->program_time = $program_time;
-        $this->event = 'REPORT';
-        $this->message = $reportMessage;
-        $this->actual_time = $actual_time;
-        $this->display_message = $actual_time . ' ' . $reportMessage;
-        $this->colors = '#fff';
-        if (!$this->save()) {
-            throw new Exception(json_encode($this->getErrors()));
+
+        $newTask = new Task();
+        $newTask->program_time = $this->program_time;
+        $newTask->event = 'REPORT';
+        $newTask->message = $reportMessage;
+        $newTask->actual_time = $actual_time;
+        $newTask->display_message = $this->program_time . ' ' . $reportMessage;
+        $newTask->colors = '#fff';
+        if (!$newTask->save()) {
+            throw new Exception(json_encode($newTask->getErrors()));
+        } else {
+            echo $newTask->display_message;
         }
 
         $response = 'Reported' . ' ' . $this->servers . ' ' . ' running';

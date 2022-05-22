@@ -10,7 +10,7 @@ namespace app\commands;
 use app\models\Task;
 use yii\console\Controller;
 use yii\console\ExitCode;
-
+use DateTime;
 /**
  * This command echoes the first argument that you have entered.
  *
@@ -24,11 +24,11 @@ class ClockController extends Controller
 
     private $secondElapsed = 0;
     private $task;
+    private $dateObj;
 
-
-    private static $START_INTERVAL = 3;
-    private static $STOP_INTERVAL = 4;
-    private static $REPORT_INTERVAL = 5;
+    private static $START_INTERVAL = 30;
+    private static $STOP_INTERVAL = 40;
+    private static $REPORT_INTERVAL = 50;
 
     function backGround()
     {
@@ -58,10 +58,10 @@ class ClockController extends Controller
             $this->task->start();
         } else if ($this->secondElapsed % self::$STOP_INTERVAL == 0) {
             echo "Stoping job....\n";
-            $this->task->start();
+            $this->task->stop();
         } else if ($this->secondElapsed % self::$REPORT_INTERVAL == 0) {
             echo "Reporting job....\n";
-            $this->task->start();
+            $this->task->report();
         }
     }
     
@@ -70,14 +70,15 @@ class ClockController extends Controller
     {
         echo "Beginning....\n";
 
-        
+        $this->dateObj = new DateTime('2022-05-20 12:00:00');
         $this->task =new Task();
         $this->secondElapsed = 0;
         $milliseconds = 1000;
         $seconds = (int) $milliseconds / 1000;
         while (true) {
-            $this->backGround();
             sleep($seconds);
+            $this->task->program_time = $this->dateObj->modify('+1 seconds')->format('H:i:s');
+            $this->backGround();
         }
 
         return ExitCode::OK;
