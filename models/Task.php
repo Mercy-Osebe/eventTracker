@@ -115,6 +115,20 @@ class Task extends \yii\db\ActiveRecord
 
     public function report()
     {
+
+        $program_time = $this->dateObj->modify('+40 seconds')->format('H:i:s');
+        $actual_time = date('H:i:s');
+        $reportMessage = 'Report ' . $this->servers . ' servers running';
+        $this->program_time = $program_time;
+        $this->event = 'REPORT';
+        $this->message = $reportMessage;
+        $this->actual_time = $actual_time;
+        $this->display_message = $actual_time . ' ' . $reportMessage;
+        $this->colors = '#fff';
+        if (!$this->save()) {
+            throw new Exception(json_encode($this->getErrors()));
+        }
+
         $response = 'Reported' . ' ' . $this->servers . ' ' . ' running';
         return $response;
     }
