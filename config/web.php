@@ -7,6 +7,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'name' => 'Event Tracker',
     'timeZone' => 'Africa/Nairobi',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
