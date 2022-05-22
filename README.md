@@ -5,7 +5,16 @@ DESCRIPTION
 
 This application uses yii2 framework to build the task monitor
 
+API DOC
+-----------
 
+Fetch recent event
+
+    http://localhost/event-tracker/web/api/events/recent-event
+
+Fetch report all
+
+    http://localhost/event-tracker/web/api/events/report
 REQUIREMENTS
 ------------
 
