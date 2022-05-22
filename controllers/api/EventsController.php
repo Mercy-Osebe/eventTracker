@@ -13,4 +13,9 @@ class EventsController extends Controller
         return Task::find()->all();
     }
 
+
+    public function actionRecentEvent(){
+        return Task::find()->orderBy(['id' => SORT_DESC])->one();
+    }
+
 }

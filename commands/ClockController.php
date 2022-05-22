@@ -26,9 +26,9 @@ class ClockController extends Controller
     private $task;
     private $dateObj;
 
-    private static $START_INTERVAL = 30;
-    private static $STOP_INTERVAL = 40;
-    private static $REPORT_INTERVAL = 50;
+    private static $START_INTERVAL = 3;
+    private static $STOP_INTERVAL = 4;
+    private static $REPORT_INTERVAL = 5;
 
     function backGround()
     {
