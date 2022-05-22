@@ -21,6 +21,10 @@ class Task extends \yii\db\ActiveRecord
     private $servers = 0; // active servers
     private $serversToStop = 0; // no of servers to stop
 
+
+    private static $START_COLOR = 'green';
+    private static $STOP_COLOR = 'red';
+    private static $REPORT_COLOR = 'blue';
    
 
     function __construct()
@@ -97,7 +101,7 @@ class Task extends \yii\db\ActiveRecord
         
         $newTask->actual_time = date('H:i:s');
         $newTask->display_message = $this->program_time. ' ' . $startMessage;
-        $newTask->colors = '#fff';
+        $newTask->colors = self::$START_COLOR;
         if ($newTask->save()) {
             $this->servers = $this->servers + $servers;
             echo $newTask->display_message;
@@ -124,7 +128,7 @@ class Task extends \yii\db\ActiveRecord
         $newTask->message = $stopMessage;
         $newTask->actual_time = $actual_time;
         $newTask->display_message = $this->program_time. ' ' . $stopMessage;
-        $newTask->colors = '#fff';
+        $newTask->colors = self::$STOP_COLOR;
         if (!$newTask->save()) {
             throw new Exception(json_encode($newTask->getErrors()));
         } else {
@@ -143,7 +147,7 @@ class Task extends \yii\db\ActiveRecord
         $newTask->message = $reportMessage;
         $newTask->actual_time = $actual_time;
         $newTask->display_message = $this->program_time . ' ' . $reportMessage;
-        $newTask->colors = '#fff';
+        $newTask->colors = self::$REPORT_COLOR;
         if (!$newTask->save()) {
             throw new Exception(json_encode($newTask->getErrors()));
         } else {
