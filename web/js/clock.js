@@ -23,7 +23,6 @@ button.addEventListener('click', function () {
     .then((result) => {
       formatStr = ''
       formatStr += '<table class="table table-sm">'
-
       formatStr += ' <tr>'
       formatStr += '<th> Program time </th>'
       formatStr += '-'

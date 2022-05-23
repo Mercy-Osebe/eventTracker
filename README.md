@@ -70,3 +70,20 @@ REQUIREMENTS
     ```
     php vendor/bin/codecept run unit tests/unit/models/TaskTest
     ```
+
+### Screenshots
+
+Start screen
+
+![Start Screen](./screenshots/startScreen.png)
+
+
+Recent events
+
+![Recent events](./screenshots/recebtEventLog.png)
+
+AllEvents 
+
+![AllEvents ](./screenshots/allEventsLog.png)
+
+
